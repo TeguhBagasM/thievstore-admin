@@ -16,7 +16,7 @@ import { Input } from "@/components/ui/input";
 import toast from "react-hot-toast";
 import { useParams, useRouter } from "next/navigation";
 import { AlertModal } from "@/components/modals/alert-modal";
-// import { ApiAlert } from "@/components/ui/api-alert";
+import { ApiAlert } from "@/components/ui/api-alert";
 import { useOrigin } from "@/hooks/use-origin";
 
 interface SettingsFormProps {
@@ -108,11 +108,12 @@ export const SettingsForm: React.FC<SettingsFormProps> = ({ initialData }) => {
         </form>
       </Form>
       <Separator />
-      {/* <ApiAlert
+      <ApiAlert
         title="PUBLIC_API_URL"
         description={`${origin}/api/${params.storeId}`}
         variant="public"
-      /> */}
+      />
+      {/* pake backtick `` karna mau pake template literal */}
     </>
   );
 };
