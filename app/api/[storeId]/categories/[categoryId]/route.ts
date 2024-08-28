@@ -1,11 +1,8 @@
 import db from "@/lib/db";
-import { auth } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 
-export async function GET(
-  req: Request,
-  { params }: { params: { categoryId: string } }
-) {
+export async function GET(req: Request, { params }: { params: { categoryId: string } }) {
   try {
     if (!params.categoryId) {
       return new NextResponse("Category id dibutuhkan", { status: 400 });

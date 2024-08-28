@@ -1,6 +1,5 @@
 "use client";
 
-import { Banner } from "@prisma/client";
 import { Button } from "@/components/ui/button";
 import { Heading } from "@/components/ui/heading";
 import { Separator } from "@/components/ui/separator";
@@ -11,12 +10,10 @@ import { DataTable } from "@/components/ui/data-table";
 import { ApiList } from "@/components/ui/api-list";
 
 interface BannerClientProps {
-  data: BannerColumn[]
+  data: BannerColumn[];
 }
 
-export const BannerClient: React.FC<BannerClientProps> = ({
-  data
-}) => {
+export const BannerClient: React.FC<BannerClientProps> = ({ data }) => {
   const router = useRouter();
   const params = useParams();
 
@@ -31,10 +28,7 @@ export const BannerClient: React.FC<BannerClientProps> = ({
       </div>
       <Separator />
       <DataTable data={data} columns={columns} searchKey="label" />
-      <Heading 
-      title="API"
-      description="API untuk Banners"
-      />
+      <Heading title="API" description="API untuk Banners" />
       <Separator />
       <ApiList namaIndikator="banners" idIndikator="bannerId" />
     </>

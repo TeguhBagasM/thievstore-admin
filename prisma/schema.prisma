@@ -17,6 +17,36 @@ model Store {
   id      String    @id @default(uuid())
   name    String
   userId  String
+  banners Banner[] @relation("StoreToBanner")
+  categories Category[] @relation("StoreToCategory")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model Banner {
+  id        String     @id @default(uuid())
+  storeId   String
+  store     Store      @relation("StoreToBanner", fields: [storeId], references: [id])
+  label     String
+  imageUrl  String
+  categories Category[] @relation("BannerToCategory")
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+
+  @@index([storeId])
+}
+
+
+model Category {
+  id      String @id @default(uuid())
+  storeId String
+  store   Store @relation("StoreToCategory", fields: [storeId], references: [id])
+  bannerId  String
+  banner    Banner   @relation("BannerToCategory", fields: [bannerId], references: [id])
+  name    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([storeId])
+  @@index([bannerId])
 }

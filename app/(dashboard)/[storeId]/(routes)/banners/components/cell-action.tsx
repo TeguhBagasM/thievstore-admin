@@ -49,37 +49,35 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
 
   return (
     <>
-    <AlertModal 
-    isOpen={open}
-    onClose={() => setOpen(false)}
-    onConfirm={onDelete}
-    loading={loading}
-    />
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="ghost">
-          <span className="sr-only">Open Menu</span>
-          <MoreHorizontal className="h-4 w-4" />
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
-        <DropdownMenuLabel>Actions</DropdownMenuLabel>
-        <DropdownMenuItem onClick={() => onCopy(data.id)}>
-          <Copy className="mr-2 h-4 w-4" />
-          Copy Id
-        </DropdownMenuItem>
-        <DropdownMenuItem
-          onClick={() => router.push(`/${params.storeId}/banners/${data.id}`)}
-        >
-          <Edit className="mr-2 h-4 w-4" />
-          Update
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setOpen(true)}>
-          <Trash className="mr-2 h-4 w-4" />
-          Delete
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+      <AlertModal
+        isOpen={open}
+        onClose={() => setOpen(false)}
+        onConfirm={onDelete}
+        loading={loading}
+      />
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant="ghost">
+            <span className="sr-only">Open Menu</span>
+            <MoreHorizontal className="h-4 w-4" />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end">
+          <DropdownMenuLabel>Actions</DropdownMenuLabel>
+          <DropdownMenuItem onClick={() => onCopy(data.id)}>
+            <Copy className="mr-2 h-4 w-4" />
+            Copy Id
+          </DropdownMenuItem>
+          <DropdownMenuItem onClick={() => router.push(`/${params.storeId}/banners/${data.id}`)}>
+            <Edit className="mr-2 h-4 w-4" />
+            Update
+          </DropdownMenuItem>
+          <DropdownMenuItem onClick={() => setOpen(true)}>
+            <Trash className="mr-2 h-4 w-4" />
+            Delete
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
     </>
   );
 };
