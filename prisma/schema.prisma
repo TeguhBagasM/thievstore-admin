@@ -19,6 +19,7 @@ model Store {
   userId  String
   banners Banner[] @relation("StoreToBanner")
   categories Category[] @relation("StoreToCategory")
+  product Product[] @relation("StoreToProduct")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -43,10 +44,40 @@ model Category {
   store   Store @relation("StoreToCategory", fields: [storeId], references: [id])
   bannerId  String
   banner    Banner   @relation("BannerToCategory", fields: [bannerId], references: [id])
+  products  Product[] @relation("CategoryToProduct")
   name    String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   @@index([storeId])
   @@index([bannerId])
+}
+
+model Product {
+  id      String @id @default(uuid())
+  storeId String
+  store   Store @relation("StoreToProduct", fields: [storeId], references: [id])
+  categoryId  String
+  category  Category @relation("CategoryToProduct", fields: [categoryId], references: [id])
+  name    String
+  price   Decimal
+  isFeatured  Boolean @default(false)
+  isArchived  Boolean @default(false)
+  images  Image[]
+  createdAt DateTime @default(now()) 
+  updatedAt DateTime @updatedAt
+
+  @@index([storeId])
+  @@index([categoryId])
+}
+
+model Image {
+  id        String @unique @default(uuid())
+  productId String
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  url       String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([productId])
 }
