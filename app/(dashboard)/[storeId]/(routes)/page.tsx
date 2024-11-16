@@ -16,6 +16,9 @@ const DashboardPage: React.FC<DashboardPageProps> = async ({ params }) => {
   const categoryCount = await getCategoryCount(params.storeId);
   const stockCount = await getStockCount(params.storeId);
 
+  // Convert Decimal to number before formatting
+  const formattedTotalPrice = totalPrice ? Number(totalPrice.toString()) : 0;
+
   return (
     <div className="flex-col">
       <div className="flex-1 space-y-4 p-8 pt-6">
@@ -28,7 +31,7 @@ const DashboardPage: React.FC<DashboardPageProps> = async ({ params }) => {
               <DollarSign className="w-4 h-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{formatter.format(totalPrice)}</div>
+              <div className="text-2xl font-bold">{formatter.format(formattedTotalPrice)}</div>
             </CardContent>
           </Card>
           <Card>
